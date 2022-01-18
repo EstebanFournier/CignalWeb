@@ -1,32 +1,51 @@
 <template>
   <div>
     <h1>
-      {{alertIdData}}
+      {{ alertIdData.id }}
     </h1>
+    <h2>
+      {{ alertIdData.projectName }}
+    </h2>
+    <h3>
+      {{ alertIdData.description }}
+    </h3>
   </div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    alertIdData: {},
-    id: 0,
-  }),
-
-  created() {
-    console.log("route:", this.$route.params);
-    this.id = this.$route.params.id;
-    console.log('id:', this.id);
+  data() {
+    return {
+      alertIdData: "",
+      id: "",
+    };
   },
 
-  async mounted() {
-    const apiURL = `http://localhost:8000/api/alert/`;
-    console.log('url:', apiURL + this.id);
+  async created() {
+    let auth = localStorage.getItem("Authorization");
+    console.log("auth", auth);
 
-    const response = await fetch(apiURL + this.id).then((data) => data.json());
+    this.id = this.$route.params.id;
+    console.log("id", this.id);
 
-    this.alertIdData = response;
-    console.log('response', response)
+    var params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth,
+      },
+    };
+    console.log("params", params);
+
+    var apiURL = "http://localhost:8000/api/alert/";
+
+    fetch(apiURL + this.id, params)
+      .then((response) => response.json())
+      .then((data) => {
+        this.alertIdData = data;
+        console.log("apiurl + id + params", apiURL + this.id, params);
+        console.log("data", this.alertIdData);
+      });
   },
 };
 </script>

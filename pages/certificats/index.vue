@@ -19,18 +19,32 @@
 
 <script>
 export default {
-  data: () => ({
-    certificatData: {},
-  }),
-  id: 2,
+  data() {
+    return {
+      certificatData: "",
+    };
+  },
 
   async created() {
-    const apiURL = "http://localhost:8000/api/certificat/";
+    let auth = localStorage.getItem("Authorization");
 
-    const response = await fetch(apiURL).then(
-      (data) => data.json());
+    var params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth,
+      },
+    };
 
-    this.certificatData = response;
+    var apiURL = "http://localhost:8000/api/certificat";
+
+    fetch(apiURL, params)
+      .then((response) => response.json())
+      .then((data) => {
+        this.certificatData = data;
+        //console.log("data", data);
+        //console.log("certificatData", data.certificatData);
+      });
   },
 };
 </script>
