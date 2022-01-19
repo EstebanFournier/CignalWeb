@@ -70,6 +70,11 @@ export default {
     };
   },
 
+  async created() {
+    localStorage.clear();
+    console.log('clearStorage', localStorage)
+  },
+
   methods: {
     submit() {
       const dataConnect = {
@@ -83,6 +88,7 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataConnect),
       };
+      console.log('params', myInit)
 
       var apiURL = "http://localhost:8000/api/login";
 
@@ -93,7 +99,7 @@ export default {
           console.log("token", data.token);
 
           localStorage.setItem("Authorization", data.token);
-          //console.log('localstorage', localStorage)
+          console.log("localstorage", localStorage);
 
           this.$router.push("/");
         });

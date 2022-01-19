@@ -1,24 +1,10 @@
-<template>
-  <div>
-    <TheHeader />
-    <NavBar />
-    <h1>
-      {{ alertIdData.id }}
-    </h1>
-    <h2>
-      {{ alertIdData.projectName }}
-    </h2>
-    <h3>
-      {{ alertIdData.description }}
-    </h3>
-  </div>
-</template>
+<template></template>
 
 <script>
 export default {
   data() {
     return {
-      alertIdData: "",
+        deleteMessage: "",
       id: "",
     };
   },
@@ -31,7 +17,7 @@ export default {
     console.log("id", this.id);
 
     var params = {
-      method: "GET",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + auth,
@@ -44,10 +30,13 @@ export default {
     fetch(apiURL + this.id, params)
       .then((response) => response.json())
       .then((data) => {
-        this.alertIdData = data;
+        this.deleteMessage = data;
         console.log("apiurl + id + params", apiURL + this.id, params);
-        console.log("data", this.alertIdData);
+        console.log("data", this.deleteMessage);
+        this.$router.push("/alerts/");
       });
   },
 };
 </script>
+
+<style></style>

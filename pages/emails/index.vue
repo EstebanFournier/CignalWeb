@@ -2,19 +2,19 @@
   <div>
     <TheHeader />
     <NavBar />
-    <div class="mt-4" v-for="certificat in certificatData" :key="certificat.id">
+    <div class="mt-4" v-for="email in emailData" :key="email.id">
       <br />
       <h1>
-        {{ certificat.id }}
+        {{ email.id }}
       </h1>
       <h2>
-        {{ certificat.projectName }}
+        {{ email.email }}
       </h2>
-      <p>
-        {{ certificat.description }}
-      </p>
+      <h2>
+        {{ email.certificat_id }}
+      </h2>
       <div>
-        <NuxtLink :to="`/certificats/${certificat.id}`">
+        <NuxtLink :to="`/emails/${email.id}`">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -31,7 +31,7 @@
         </NuxtLink>
       </div>
       <div>
-        <NuxtLink :to="`/certificats/update/${certificat.id}`">
+        <NuxtLink :to="`/emails/update/${email.id}`">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -49,7 +49,7 @@
         </NuxtLink>
       </div>
       <div>
-        <NuxtLink :to="`/certificats/delete/${certificat.id}`">
+        <NuxtLink :to="`/emails/delete/${email.id}`">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -74,7 +74,7 @@
 export default {
   data() {
     return {
-      certificatData: "",
+      emailData: "",
     };
   },
 
@@ -89,14 +89,14 @@ export default {
       },
     };
 
-    var apiURL = "http://localhost:8000/api/certificat";
+    var apiURL = "http://localhost:8000/api/email";
 
     fetch(apiURL, params)
       .then((response) => response.json())
       .then((data) => {
-        this.certificatData = data;
-        //console.log("data", data);
-        //console.log("certificatData", data.certificatData);
+        this.emailData = data;
+        console.log("data", data);
+        console.log("emailData", data.emailData);
       });
   },
 };

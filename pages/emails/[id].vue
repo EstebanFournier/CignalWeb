@@ -3,13 +3,13 @@
     <TheHeader />
     <NavBar />
     <h1>
-      {{ alertIdData.id }}
+      {{ emailIdData.id }}
     </h1>
     <h2>
-      {{ alertIdData.projectName }}
+      {{ emailIdData.email }}
     </h2>
     <h3>
-      {{ alertIdData.description }}
+      {{ emailIdData.certificat_id }}
     </h3>
   </div>
 </template>
@@ -18,7 +18,7 @@
 export default {
   data() {
     return {
-      alertIdData: "",
+      emailIdData: "",
       id: "",
     };
   },
@@ -39,14 +39,14 @@ export default {
     };
     console.log("params", params);
 
-    var apiURL = "http://localhost:8000/api/alert/";
+    var apiURL = "http://localhost:8000/api/email/";
 
     fetch(apiURL + this.id, params)
       .then((response) => response.json())
       .then((data) => {
-        this.alertIdData = data;
+        this.emailIdData = data;
         console.log("apiurl + id + params", apiURL + this.id, params);
-        console.log("data", this.alertIdData);
+        console.log("data", this.emailIdData);
       });
   },
 };
