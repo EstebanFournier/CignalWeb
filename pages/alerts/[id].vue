@@ -23,12 +23,12 @@ export default {
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
-    console.log("auth", auth);
+    //console.log("auth", auth);
 
     this.id = this.$route.params.id;
-    console.log("id", this.id);
+    //console.log("id", this.id);
 
     var params = {
       method: "GET",
@@ -37,16 +37,19 @@ export default {
         Authorization: "Bearer " + auth,
       },
     };
-    console.log("params", params);
+    //console.log("params", params);
 
     var apiURL = "http://localhost:8000/api/alert/";
 
     fetch(apiURL + this.id, params)
-      .then((response) => response.json())
-      .then((data) => {
-        this.alertIdData = data;
-        console.log("apiurl + id + params", apiURL + this.id, params);
-        console.log("data", this.alertIdData);
+      .then((response)=>response.json())
+      .then((response) => {
+        this.alertIdData = response;
+        //console.log("apiurl + id + params", apiURL + this.id, params);
+        //console.log("data", this.alertIdData);
+      })
+      .catch((error) => {
+        console.log("error", error);
       });
   },
 };

@@ -2,7 +2,7 @@
   <div>
     <TheHeader />
     <NavBar />
-    <div class="mt-4" v-for="certificat in certificatData" :key="certificat.id">
+    <div class="" v-for="certificat in certificatData" :key="certificat.id">
       <br />
       <h1>
         {{ certificat.id }}
@@ -78,7 +78,7 @@ export default {
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
 
     var params = {
@@ -88,15 +88,19 @@ export default {
         Authorization: "Bearer " + auth,
       },
     };
+    //console.log('params', params)
 
     var apiURL = "http://localhost:8000/api/certificat";
 
     fetch(apiURL, params)
       .then((response) => response.json())
-      .then((data) => {
-        this.certificatData = data;
+      .then((response) => {
+        this.certificatData = response;
         //console.log("data", data);
-        //console.log("certificatData", data.certificatData);
+        console.log("certificatData", this.certificatData);
+      })
+      .catch((error) => {
+        console.log("error", error);
       });
   },
 };

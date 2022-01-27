@@ -78,7 +78,7 @@ export default {
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
 
     var params = {
@@ -92,12 +92,12 @@ export default {
     var apiURL = "http://localhost:8000/api/email";
 
     fetch(apiURL, params)
-      .then((response) => response.json())
-      .then((data) => {
-        this.emailData = data;
-        console.log("data", data);
-        console.log("emailData", data.emailData);
-      });
+      .then((response)=>response.json())
+      .then((response) => {
+      this.emailData = response;
+      //console.log("data", data);
+      //console.log("emailData", data.emailData);
+    });
   },
 };
 </script>

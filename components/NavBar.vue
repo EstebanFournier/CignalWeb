@@ -1,7 +1,7 @@
 <template>
   <div class="bg-transparent h-full w-64">
     <div class="flex flex-col gap-3 mt-10 ml-5 mb-10">
-      <NuxtLink :to="`/`">
+      <NuxtLink :to="`/dashboard`">
         <div
           class="flex-initial bg-transparent w-48 h-10 border-solid border-[#797979] border-2"
         >
@@ -46,9 +46,9 @@ export default {
   methods: {
     submit() {
       let auth = localStorage.getItem("Authorization");
-      console.log("auth", auth);
+      //console.log("auth", auth);
       localStorage.clear.Authorization;
-      console.log("storage", localStorage);
+      //console.log("storage", localStorage);
 
       var params = {
         method: "POST",
@@ -62,7 +62,7 @@ export default {
 
       fetch(apiURL, params).then((response) => response.json());
 
-      this.$router.push("/authenticate/login");
+      this.$router.push("/");
     },
   },
 };

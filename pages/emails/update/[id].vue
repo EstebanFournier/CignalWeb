@@ -2,20 +2,20 @@
   <div>
     <TheHeader />
     <NavBar />
-    <form id="form" method="PUT">
+    <form id="form" method="PUT" @submit="submit">
       <div>
         <input
           id="email"
           name="email"
           type="text"
-          value="email"
+          v-model="emailIdData.email"
           class=""
           placeholder="Email"
         />
       </div>
       <div>
         <br />
-        <button class="" @click="submit" type="submit">Mettre à jour</button>
+        <button class="" type="submit">Mettre à jour</button>
       </div>
     </form>
   </div>
@@ -27,11 +27,10 @@ export default {
     return {
       emailIdData: "",
       id: "",
-      inputEmail: "",
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
     //console.log("auth", auth);
 
@@ -50,31 +49,23 @@ export default {
     var apiURL = "http://localhost:8000/api/email/";
 
     fetch(apiURL + this.id, params)
-      .then((response) => response.json())
-      .then((data) => {
-        this.emailIdData = data;
+      .then((response) => {
+        this.emailIdData = response.json();
         //console.log("apiurl + id + params", apiURL + this.id, params);
         //console.log("data", this.certificatIdData);
-        const dataConnect = {
-          email: (document.getElementById("email").value =
-            this.emailIdData.email),
-        };
-        //console.log("ok", dataConnect);
+      })
+      .catch((error) => {
+        console.log("error", error);
       });
   },
 
   methods: {
-    submit() {
+    submit(e) {
+      e.preventDefault();
+
       // Keep auth token for request
       let auth = localStorage.getItem("Authorization");
       //console.log("auth", auth);
-
-      // Keep inputData in form for request
-      const dataConnect = {
-        email: document.getElementById("email").value,
-
-      };
-      console.log("ok2", dataConnect);
 
       // Creation of parameters for request
       var params = {
@@ -83,19 +74,21 @@ export default {
           "Content-Type": "application/json",
           Authorization: "Bearer " + auth,
         },
-        body: JSON.stringify(dataConnect),
+        body: JSON.stringify(this.emailIdData),
       };
       //console.log("params", params);
 
       var apiURL = "http://localhost:8000/api/email/";
 
-      fetch(apiURL + this.id, params).then((response) => response.json());
-      /* .then((data) => {
-          this.certificatIdData = data;
-        }); */
+      fetch(apiURL + this.id, params)
+        .then((response) => response.json())
+        .catch((error) => {
+          console.log("error", error);
+        })
+        .finally(() => {
+          this.$router.push("/emails/");
+        });
       console.log("apiurl + id + params", apiURL + this.id, params);
-      //console.log("data", this.certificatIdData);
-      this.$router.push("/emails/");
     },
   },
 };

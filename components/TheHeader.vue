@@ -2,7 +2,7 @@
   <div class="mx-auto bg-transparent h-28 w-full">
     <div class="flex flex-row flex-wrap gap-3 mt-3">
       <div class="flex-initial bg-transparent w-64 h-28">
-        <NuxtLink :to="`/`">
+        <NuxtLink :to="`/dashboard`">
         <img
           src="https://www.cubecom.fr/wp-content/uploads/2020/12/Logo-Cube-FondBlanc.png"
         />

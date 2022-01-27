@@ -4,17 +4,17 @@
 export default {
   data() {
     return {
-        deleteMessage: "",
+      deleteMessage: "",
       id: "",
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
-    console.log("auth", auth);
+    //console.log("auth", auth);
 
     this.id = this.$route.params.id;
-    console.log("id", this.id);
+    //console.log("id", this.id);
 
     var params = {
       method: "DELETE",
@@ -23,20 +23,22 @@ export default {
         Authorization: "Bearer " + auth,
       },
     };
-    console.log("params", params);
+    //console.log("params", params);
 
     var apiURL = "http://localhost:8000/api/alert/";
 
     fetch(apiURL + this.id, params)
-      .then((response) => response.json())
-      .then((data) => {
-        this.deleteMessage = data;
-        console.log("apiurl + id + params", apiURL + this.id, params);
-        console.log("data", this.deleteMessage);
+      .then((response) => {
+        this.deleteMessage = response.json();
+        //console.log("apiurl + id + params", apiURL + this.id, params);
+        //console.log("data", this.deleteMessage);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      })
+      .finally(() => {
         this.$router.push("/alerts/");
       });
   },
 };
 </script>
-
-<style></style>

@@ -78,9 +78,9 @@ export default {
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
-    console.log("auth", auth);
+    //console.log("auth", auth);
 
     var params = {
       method: "GET",
@@ -95,11 +95,13 @@ export default {
     //console.log('apiURL', apiURL)
 
     fetch(apiURL, params)
-      .then((response) => response.json())
-      .then((data) => {
-        //console.log(data)
-        this.alertData = data;
+      .then((response)=>response.json())
+      .then((response) => {
+        this.alertData = response;
         //console.log("data", this.alertData);
+      })
+      .catch((error) => {
+        console.log("error", error);
       });
   },
 };

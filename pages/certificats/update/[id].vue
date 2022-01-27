@@ -2,13 +2,13 @@
   <div>
     <TheHeader />
     <NavBar />
-    <form id="form" method="PUT">
+    <form id="form" method="PUT" @submit="submit">
       <div>
         <input
           id="projectName"
           name="projectName"
           type="text"
-          value="projectName"
+          v-model="certificatIdData.projectName"
           class=""
           placeholder="Nom du certificat"
         />
@@ -18,7 +18,7 @@
           id="type"
           name="type"
           type="text"
-          value="type"
+          v-model="certificatIdData.type"
           class=""
           placeholder="Type de certificat"
         />
@@ -28,7 +28,7 @@
           id="plateform"
           name="plateform"
           type="text"
-          value="plateform"
+          v-model="certificatIdData.plateform"
           class=""
           placeholder="Nom de la plateforme"
         />
@@ -38,7 +38,7 @@
           id="description"
           name="description"
           type="text"
-          value="description"
+          v-model="certificatIdData.description"
           class=""
           placeholder="Description"
         />
@@ -48,7 +48,7 @@
           id="startDate"
           name="startDate"
           type="date"
-          value="startDate"
+          v-model="certificatIdData.startDate"
           class=""
           placeholder="Date de début"
         />
@@ -58,14 +58,14 @@
           id="endDate"
           name="endDate"
           type="date"
-          value="endDate"
+          v-model="certificatIdData.endDate"
           class=""
           placeholder="Date de fin"
         />
       </div>
       <div>
         <br />
-        <button class="" @click="submit" type="submit">Mettre à jour</button>
+        <button class="" type="submit">Mettre à jour</button>
       </div>
     </form>
   </div>
@@ -77,16 +77,10 @@ export default {
     return {
       certificatIdData: "",
       id: "",
-      inputEndDate: "",
-      inputStartDate: "",
-      inputDescription: "",
-      inputPlateform: "",
-      inputType: "",
-      inputProjectName: "",
     };
   },
 
-  async created() {
+  async mounted() {
     let auth = localStorage.getItem("Authorization");
     //console.log("auth", auth);
 
@@ -104,46 +98,20 @@ export default {
 
     var apiURL = "http://localhost:8000/api/certificat/";
 
-    fetch(apiURL + this.id, params)
-      .then((response) => response.json())
-      .then((data) => {
-        this.certificatIdData = data;
-        //console.log("apiurl + id + params", apiURL + this.id, params);
-        //console.log("data", this.certificatIdData);
-        const dataConnect = {
-          projectName: (document.getElementById("projectName").value =
-            this.certificatIdData.projectName),
-          type: (document.getElementById("type").value =
-            this.certificatIdData.type),
-          plateform: (document.getElementById("plateform").value =
-            this.certificatIdData.plateform),
-          description: (document.getElementById("description").value =
-            this.certificatIdData.description),
-          startDate: (document.getElementById("startDate").value =
-            this.certificatIdData.startDate),
-          endDate: (document.getElementById("endDate").value =
-            this.certificatIdData.endDate),
-        };
-        //console.log("ok", dataConnect);
-      });
+    fetch(apiURL + this.id, params).then((response) => {
+      this.certificatIdData = response.json();
+      //console.log("apiurl + id + params", apiURL + this.id, params);
+      //console.log("data", this.certificatIdData);
+    });
   },
 
   methods: {
-    submit() {
+    submit(e) {
+      e.preventDefault();
+
       // Keep auth token for request
       let auth = localStorage.getItem("Authorization");
       //console.log("auth", auth);
-
-      // Keep inputData in form for request
-      const dataConnect = {
-        projectName: document.getElementById("projectName").value,
-        type: document.getElementById("type").value,
-        plateform: document.getElementById("plateform").value,
-        description: document.getElementById("description").value,
-        startDate: document.getElementById("startDate").value,
-        endDate: document.getElementById("endDate").value,
-      };
-      console.log("ok2", dataConnect);
 
       // Creation of parameters for request
       var params = {
@@ -152,19 +120,21 @@ export default {
           "Content-Type": "application/json",
           Authorization: "Bearer " + auth,
         },
-        body: JSON.stringify(dataConnect),
+        body: JSON.stringify(this.certificatIdData),
       };
       //console.log("params", params);
 
       var apiURL = "http://localhost:8000/api/certificat/";
 
-      fetch(apiURL + this.id, params).then((response) => response.json());
-      /* .then((data) => {
-          this.certificatIdData = data;
-        }); */
+      fetch(apiURL + this.id, params)
+        .then((response) => response.json())
+        .catch((error) => {
+          console.log("error", error);
+        })
+        .finally(() => {
+          this.$router.push("/certificats/");
+        });
       console.log("apiurl + id + params", apiURL + this.id, params);
-      //console.log("data", this.certificatIdData);
-      this.$router.push("/certificats/");
     },
   },
 };
