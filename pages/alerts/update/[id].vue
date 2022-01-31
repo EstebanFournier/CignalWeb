@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TheHeader />
-    <NavBar />
+    <TheHeader title="Alertes"></TheHeader>
+
     <form id="form" method="PUT" @submit="submit">
       <div>
         <input
@@ -9,7 +9,23 @@
           name="nameAlert"
           type="text"
           v-model="alertIdData.nameAlert"
-          class=""
+          class="
+            mb-3
+            appearance
+            relative
+            block
+            w-48
+            px-3
+            py-2
+            border border-black
+            placeholder-black-500
+            text-black
+            focus:outline-none
+            focus:ring-red-500
+            focus:border-red-500
+            focus:z-10
+            sm:text-sm
+          "
           placeholder="Nom de l'alerte"
         />
       </div>
@@ -19,7 +35,23 @@
           name="dateAlert"
           type="text"
           v-model="alertIdData.dateAlert"
-          class=""
+          class="
+            mb-3
+            appearance
+            relative
+            block
+            w-48
+            px-3
+            py-2
+            border border-black
+            placeholder-black-500
+            text-black
+            focus:outline-none
+            focus:ring-red-500
+            focus:border-red-500
+            focus:z-10
+            sm:text-sm
+          "
           placeholder="Date de l'alerte"
         />
       </div>
@@ -29,13 +61,51 @@
           name="description"
           type="text"
           v-model="alertIdData.description"
-          class=""
+          class="
+            appearance
+            relative
+            block
+            w-48
+            px-3
+            py-2
+            border border-black
+            placeholder-black-500
+            text-black
+            focus:outline-none
+            focus:ring-red-500
+            focus:border-red-500
+            focus:z-10
+            sm:text-sm
+          "
           placeholder="Description"
         />
       </div>
       <div>
         <br />
-        <button class="" type="submit">Mettre à jour</button>
+        <button
+          class="
+            group
+            relative
+            w-48
+            flex
+            justify-center
+            py-2
+            px-4
+            border border-transparent
+            text-sm
+            font-medium
+            text-white
+            bg-red-600
+            hover:bg-red-700
+            focus:outline-none
+            focus:ring-2
+            focus:ring-offset-2
+            focus:ring-red-500
+          "
+          type="submit"
+        >
+          Mettre à jour
+        </button>
       </div>
     </form>
   </div>

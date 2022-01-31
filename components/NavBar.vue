@@ -1,40 +1,152 @@
 <template>
-  <div class="bg-transparent h-full w-64">
+  <div class="float-left bg-transparent h-full w-64">
     <div class="flex flex-col gap-3 mt-10 ml-5 mb-10">
-      <NuxtLink :to="`/dashboard`">
-        <div
-          class="flex-initial bg-transparent w-48 h-10 border-solid border-[#797979] border-2"
-        >
-          Accueil
-        </div>
+      <NuxtLink :to="`/dashboard`" class="relative px-6 py-2 group">
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            transition
+            duration-300
+            ease-out
+            transform
+            translate-x-1 translate-y-1
+            bg-black
+            group-hover:-translate-x-0 group-hover:-translate-y-0
+          "
+        ></span>
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            bg-white
+            border-2 border-black
+            group-hover:bg-black
+          "
+        ></span>
+        <span class="relative text-black group-hover:text-white">Accueil</span>
       </NuxtLink>
-      <NuxtLink :to="`/certificats/`">
-        <div
-          class="flex-initial bg-transparent w-48 h-10 border-solid border-[#797979] border-2"
+      <NuxtLink :to="`/certificats/`" class="relative px-6 py-2 group">
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            transition
+            duration-300
+            ease-out
+            transform
+            translate-x-1 translate-y-1
+            bg-black
+            group-hover:-translate-x-0 group-hover:-translate-y-0
+          "
+        ></span>
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            bg-white
+            border-2 border-black
+            group-hover:bg-black
+          "
+        ></span>
+        <span class="relative text-black group-hover:text-white"
+          >Certificats</span
         >
-          Certificats
-        </div>
       </NuxtLink>
-      <NuxtLink :to="`/alerts/`">
-        <div
-          class="flex-initial bg-transparent w-48 h-10 border-solid border-[#797979] border-2"
+      <NuxtLink :to="`/alerts/`" class="relative px-6 py-2 group mb-6">
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            transition
+            duration-300
+            ease-out
+            transform
+            translate-x-1 translate-y-1
+            bg-black
+            group-hover:-translate-x-0 group-hover:-translate-y-0
+          "
+        ></span>
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            bg-white
+            border-2 border-black
+            group-hover:bg-black
+          "
+          >Alertes</span
         >
-          Alertes
-        </div>
       </NuxtLink>
-      <NuxtLink :to="`/emails`">
-        <div
-          class="flex-initial bg-transparent w-48 h-10 border-solid border-[#797979] border-2"
+      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group mb-6">
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            transition
+            duration-300
+            ease-out
+            transform
+            translate-x-1 translate-y-1
+            bg-black
+            group-hover:-translate-x-0 group-hover:-translate-y-0
+          "
+        ></span>
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            bg-white
+            border-2 border-black
+            group-hover:bg-black
+          "
+          >Emails</span
         >
-          Emails
-        </div>
       </NuxtLink>
-      <NuxtLink :to="`/emails`">
-        <div
-          class="flex-initial bg-transparent w-48 h-10 border-solid border-[#797979] border-2"
+      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group mb-6">
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            transition
+            duration-300
+            ease-out
+            transform
+            translate-x-1 translate-y-1
+            bg-black
+            group-hover:-translate-x-0 group-hover:-translate-y-0
+          "
+        ></span>
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            bg-white
+            border-2 border-black
+            group-hover:bg-black
+          "
+          >Logs</span
         >
-          Logs
-        </div>
       </NuxtLink>
       <button @click="submit" type="submit">Logout</button>
     </div>

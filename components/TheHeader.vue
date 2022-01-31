@@ -3,16 +3,23 @@
     <div class="flex flex-row flex-wrap gap-3 mt-3">
       <div class="flex-initial bg-transparent w-64 h-28">
         <NuxtLink :to="`/dashboard`">
-        <img
-          src="https://www.cubecom.fr/wp-content/uploads/2020/12/Logo-Cube-FondBlanc.png"
-        />
+          <img
+            src="https://www.cubecom.fr/wp-content/uploads/2020/12/Logo-Cube-FondBlanc.png"
+          />
         </NuxtLink>
       </div>
       <div class="flex-auto bg-transparent-500 w-10 h-28">
-        <h1 class=""></h1>
+        <h1 class="">{{title}}</h1>
       </div>
       <div
-        class="flex-initial bg-white w-64 h-28 ml-5 border-solid border-[#797979] border-2"
+        class="
+          flex-initial
+          bg-white
+          w-64
+          h-28
+          ml-5
+          border-solid border-[#797979] border-2
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,12 +38,16 @@
   </div>
 </template>
 
-<script>
+<script >
+/* const route = useRoute();
+console.log($route.meta.title); */
+
 export default {
-  data() {
-    return {
-      titlePage: "",
-    };
+  props: {
+    title: {
+      type: String,
+      default: "Mon titre",
+    },
   },
 };
 </script>

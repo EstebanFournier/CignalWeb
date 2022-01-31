@@ -1,7 +1,6 @@
 <template>
   <div>
-    <TheHeader />
-    <NavBar />
+    <TheHeader title="Certificats"></TheHeader>
     <h1>
       {{ certificatIdData.id }}
     </h1>
@@ -42,7 +41,7 @@ export default {
     var apiURL = "http://localhost:8000/api/certificat/";
 
     fetch(apiURL + this.id, params)
-      .then((response)=> response.json())
+      .then((response) => response.json())
       .then((response) => {
         this.certificatIdData = response;
         //console.log("apiurl + id + params", apiURL + this.id, params);

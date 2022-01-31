@@ -1,7 +1,6 @@
 <template>
   <div>
-    <TheHeader />
-    <NavBar />
+    <TheHeader title="Emails"/>
     <h1>
       {{ emailIdData.id }}
     </h1>

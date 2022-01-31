@@ -1,7 +1,6 @@
 <template>
   <div>
-    <TheHeader />
-    <NavBar />
+    <TheHeader title="Alertes"></TheHeader>
     <h1>
       {{ alertIdData.id }}
     </h1>
