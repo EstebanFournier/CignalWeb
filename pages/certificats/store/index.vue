@@ -164,11 +164,8 @@
             placeholder="Date de fin"
           />
         </div>
-        <!-- <div class="shadow-sm -space-y-px">
-          <input
-            id="createdBy"
-            name="createdBy"
-            type="text"
+        <div class="shadow-sm -space-y-px">
+          <select
             v-model="storeCertificat.createdBy"
             class="
               appearance
@@ -186,15 +183,19 @@
               focus:z-10
               sm:text-sm
             "
-            placeholder="Créé par"
-          />
+          >
+            <option
+              v-for="name in createdByChoose"
+              :key="name.id"
+              :value="name.id"
+            >
+              {{ name.id + " " + name.name }}
+            </option>
+          </select>
         </div>
         <div class="shadow-sm -space-y-px">
-          <input
-            id="email"
-            name="email"
-            type="email"
-            v-model="storeCertificat.email"
+          <select
+            v-model="storeCertificat.email_id"
             class="
               appearance
               relative
@@ -211,9 +212,16 @@
               focus:z-10
               sm:text-sm
             "
-            placeholder="Emai lié au certificat"
-          />
-        </div> -->
+          >
+            <option
+              v-for="email in email_idChoose"
+              :key="email.id"
+              :value="email.id"
+            >
+              {{ email.id + " " + email.email }}
+            </option>
+          </select>
+        </div>
         <div>
           <button
             type="submit"
@@ -249,6 +257,8 @@
 export default {
   data() {
     return {
+      createdByChoose: [],
+      email_idChoose: [],
       storeCertificat: {
         projectName: "",
         type: "",
@@ -256,15 +266,59 @@ export default {
         description: "",
         startDate: "",
         endDate: "",
-        /* createdBy: "",
-        email: "", */
+        createdBy: "",
+        email_id:"",
       },
     };
+  },
+
+  async mounted() {
+    let auth = localStorage.getItem("Authorization");
+
+    var params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth,
+      },
+    };
+
+    var apiURL = "http://localhost:8000/api/createdBy";
+
+    fetch(apiURL, params)
+      .then((response) => response.json())
+      .then((response) => {
+        this.createdByChoose = response;
+        this.storeCertificat.createdBy =
+          this.createdByChoose[0].id;
+        console.log("createdByChoose", this.createdByChoose);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
+    //Fetch request for email
+    var apiURL2 = "http://localhost:8000/api/email";
+
+    fetch(apiURL2, params)
+      .then((response) => response.json())
+      .then((response) => {
+        this.email_idChoose = response;
+        this.storeCertificat.email_id =
+          this.email_idChoose[0].id;
+        console.log("createdByChoose", this.email_idChoose);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   },
 
   methods: {
     submit() {
       let auth = localStorage.getItem("Authorization");
+
+      /* $body = JSON.stringify(this.storeCertificat);
+      $body.append(JSON.stringify(this.storeCertificat.createdByChoose)); */
 
       var myInit = {
         method: "POST",
