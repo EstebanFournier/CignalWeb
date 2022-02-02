@@ -89,11 +89,9 @@
             placeholder="Description"
           />
         </div>
+        
         <div class="shadow-sm -space-y-px">
-          <input
-            id="certificat_id"
-            name="certificat_id"
-            type="id"
+          <select
             v-model="storeAlert.certificat_id"
             class="
               appearance
@@ -111,110 +109,16 @@
               focus:z-10
               sm:text-sm
             "
-            placeholder="Numéro du certificat"
-          />
+          >
+            <option
+              v-for="name in certificat_idChoose"
+              :key="name.id"
+              :value="name.id"
+            >
+              {{ name.id + " " + name.projectName }}
+            </option>
+          </select>
         </div>
-        <!-- 
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="startDate"
-            name="startDate"
-            type="date"
-            v-model="storeCertificat.startDate"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Date de début"
-          />
-        </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="endDate"
-            name="endDate"
-            type="date"
-            v-model="storeCertificat.endDate"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Date de fin"
-          />
-        </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="createdBy"
-            name="createdBy"
-            type="text"
-            v-model="storeCertificat.createdBy"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Créé par"
-          />
-        </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="email"
-            name="email"
-            type="email"
-            v-model="storeCertificat.email"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Emai lié au certificat"
-          />
-        </div> -->
         <div>
           <button
             type="submit"
@@ -250,17 +154,39 @@
 export default {
   data() {
     return {
+      certificat_idChoose: [],
       storeAlert: {
         dateAlert: "",
         nameAlert: "",
-        certificat_id: "",
         description: "",
-        /* startDate: "",
-        endDate: "", */
-        /* createdBy: "",
-        email: "", */
+        certificat_id: "",
       },
     };
+  },
+
+  async mounted() {
+    let auth = localStorage.getItem("Authorization");
+
+    var params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth,
+      },
+    };
+
+    var apiURL = "http://localhost:8000/api/certificat";
+
+    fetch(apiURL, params)
+      .then((response) => response.json())
+      .then((response) => {
+        this.certificat_idChoose = response;
+        this.storeAlert.certificat_id = this.certificat_idChoose[0].id;
+        console.log("createdByChoose", this.certificat_idChoose);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   },
 
   methods: {

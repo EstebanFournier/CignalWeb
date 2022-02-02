@@ -64,37 +64,9 @@
             placeholder="Nom"
           />
         </div>
-        <!-- <div class="shadow-sm -space-y-px">
-          <input
-            id="description"
-            name="description"
-            type="text"
-            v-model="storeAlert.description"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Description"
-          />
-        </div>
         <div class="shadow-sm -space-y-px">
-          <input
-            id="description"
-            name="description"
-            type="text"
-            v-model="storeCertificat.description"
+          <select
+            v-model="storeEmail.user_id"
             class="
               appearance
               relative
@@ -111,109 +83,16 @@
               focus:z-10
               sm:text-sm
             "
-            placeholder="Description"
-          />
+          >
+            <option
+              v-for="name in user_idChoose"
+              :key="name.id"
+              :value="name.id"
+            >
+              {{ name.id + " " + name.name }}
+            </option>
+          </select>
         </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="startDate"
-            name="startDate"
-            type="date"
-            v-model="storeCertificat.startDate"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Date de début"
-          />
-        </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="endDate"
-            name="endDate"
-            type="date"
-            v-model="storeCertificat.endDate"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Date de fin"
-          />
-        </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="createdBy"
-            name="createdBy"
-            type="text"
-            v-model="storeCertificat.createdBy"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Créé par"
-          />
-        </div>
-        <div class="shadow-sm -space-y-px">
-          <input
-            id="email"
-            name="email"
-            type="email"
-            v-model="storeCertificat.email"
-            class="
-              appearance
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-black
-              placeholder-black-500
-              text-black
-              focus:outline-none
-              focus:ring-red-500
-              focus:border-red-500
-              focus:z-10
-              sm:text-sm
-            "
-            placeholder="Emai lié au certificat"
-          />
-        </div> -->
         <div>
           <button
             type="submit"
@@ -249,17 +128,38 @@
 export default {
   data() {
     return {
+      user_idChoose: [],
       storeEmail: {
         email: "",
         name: "",
-        /* plateform: "", */
-        /* description: "", */
-        /* startDate: "",
-        endDate: "", */
-        /* createdBy: "",
-        email: "", */
+        user_id: "",
       },
     };
+  },
+
+  async mounted() {
+    let auth = localStorage.getItem("Authorization");
+
+    var params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth,
+      },
+    };
+
+    var apiURL = "http://localhost:8000/api/createdBy";
+
+    fetch(apiURL, params)
+      .then((response) => response.json())
+      .then((response) => {
+        this.user_idChoose = response;
+        this.storeCertificat.user_id = this.user_idChoose[0].id;
+        console.log("createdByChoose", this.user_idChoose);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   },
 
   methods: {
@@ -283,7 +183,7 @@ export default {
           console.log("error", error);
         })
         .finally(() => {
-          return this.$router.push("/alerts/");
+          return this.$router.push("/emails/");
         });
       console.log("params + apiURL", apiURL, myInit);
     },
