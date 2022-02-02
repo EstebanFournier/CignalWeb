@@ -33,7 +33,7 @@
         <input
           id="dateAlert"
           name="dateAlert"
-          type="text"
+          type="date"
           v-model="alertIdData.dateAlert"
           class="
             mb-3
@@ -115,7 +115,11 @@
 export default {
   data() {
     return {
-      alertIdData: "",
+      alertIdData: {
+        nameAlert: "",
+        dateAlert: "",
+        description: "",
+      },
       id: "",
     };
   },
@@ -139,8 +143,10 @@ export default {
     var apiURL = "http://localhost:8000/api/alert/";
 
     fetch(apiURL + this.id, params)
+      .then((response) => response.json())
       .then((response) => {
-        this.alertIdData = response.json();
+        this.alertIdData = response;
+        console.log("alertiddata", this.alertIdData);
         //console.log("apiurl + id + params", apiURL + this.id, params);
         //console.log("data", this.certificatIdData);
       })

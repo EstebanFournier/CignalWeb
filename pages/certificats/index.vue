@@ -4,6 +4,30 @@
     <div class="flex flex-col">
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <NuxtLink
+            :to="`/certificats/store/`"
+            class="
+              group
+              relative
+              w-48
+              flex
+              justify-center
+              py-2
+              px-4
+              border border-transparent
+              text-sm
+              font-medium
+              text-white
+              bg-red-600
+              hover:bg-red-700
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-red-500
+            "
+          >
+            Ajouter un certificat
+          </NuxtLink>
           <div
             class="
               shadow
@@ -54,7 +78,33 @@
                   >
                     Description
                   </th>
-                  <th class="relative px-6 py-3">Voir/Modifier/Supprimer</th>
+                  <th
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Date de début
+                  </th>
+                  <th
+                    class="
+                      px-6
+                      py-3
+                      text-left text-xs
+                      font-medium
+                      text-gray-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Date de fin
+                  </th>
+                  <th class="relative px-6 py-3">Actions</th>
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
@@ -71,6 +121,12 @@
                   </td>
                   <td class="px-8">
                     {{ certificat.description }}
+                  </td>
+                  <td>
+                    {{ certificat.startDate }}
+                  </td>
+                  <td>
+                    {{ certificat.endDate }}
                   </td>
                   <td class="px-12">
                     <NuxtLink :to="`/certificats/${certificat.id}`">

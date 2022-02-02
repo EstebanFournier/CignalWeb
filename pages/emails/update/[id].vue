@@ -62,7 +62,9 @@
 export default {
   data() {
     return {
-      emailIdData: "",
+      emailIdData: {
+        email: "",
+      },
       id: "",
     };
   },
@@ -86,8 +88,9 @@ export default {
     var apiURL = "http://localhost:8000/api/email/";
 
     fetch(apiURL + this.id, params)
+      .then((response) => response.json())
       .then((response) => {
-        this.emailIdData = response.json();
+        this.emailIdData = response;
         //console.log("apiurl + id + params", apiURL + this.id, params);
         //console.log("data", this.certificatIdData);
       })

@@ -1,5 +1,12 @@
 <template>
   <div class="float-left bg-transparent h-full w-64">
+    <div class="flex-initial bg-transparent w-64 h-28">
+      <NuxtLink :to="`/dashboard`">
+        <img
+          src="https://www.cubecom.fr/wp-content/uploads/2020/12/Logo-Cube-FondBlanc.png"
+        />
+      </NuxtLink>
+    </div>
     <div class="flex flex-col gap-3 mt-10 ml-5 mb-10">
       <NuxtLink :to="`/dashboard`" class="relative px-6 py-2 group">
         <span
@@ -61,7 +68,7 @@
           >Certificats</span
         >
       </NuxtLink>
-      <NuxtLink :to="`/alerts/`" class="relative px-6 py-2 group mb-6">
+      <NuxtLink :to="`/alerts/`" class="relative px-6 py-2 group">
         <span
           class="
             absolute
@@ -87,10 +94,10 @@
             border-2 border-black
             group-hover:bg-black
           "
-          >Alertes</span
-        >
+        ></span>
+        <span class="relative text-black group-hover:text-white">Alertes</span>
       </NuxtLink>
-      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group mb-6">
+      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group">
         <span
           class="
             absolute
@@ -116,10 +123,10 @@
             border-2 border-black
             group-hover:bg-black
           "
-          >Emails</span
-        >
+        ></span>
+        <span class="relative text-black group-hover:text-white">Emails</span>
       </NuxtLink>
-      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group mb-6">
+      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group">
         <span
           class="
             absolute
@@ -145,10 +152,11 @@
             border-2 border-black
             group-hover:bg-black
           "
-          >Logs</span
-        >
+        ></span>
+        <span class="relative text-black group-hover:text-white">Logs</span>
       </NuxtLink>
-      <button @click="submit" type="submit">Logout</button>
+      <button @click="logout" type="submit">Logout</button>
+      <NuxtLink :to="`/register`">Register</NuxtLink>
     </div>
   </div>
 </template>
@@ -156,11 +164,9 @@
 <script>
 export default {
   methods: {
-    submit() {
+    logout() {
       let auth = localStorage.getItem("Authorization");
       //console.log("auth", auth);
-      localStorage.clear.Authorization;
-      //console.log("storage", localStorage);
 
       var params = {
         method: "POST",
@@ -173,6 +179,9 @@ export default {
       var apiURL = "http://localhost:8000/api/logout";
 
       fetch(apiURL, params).then((response) => response.json());
+      if (localStorage && localStorage.length > 0) {
+        localStorage.clear();
+      }
 
       this.$router.push("/");
     },

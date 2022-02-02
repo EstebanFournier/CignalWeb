@@ -1,15 +1,8 @@
 <template>
   <div class="mx-auto bg-transparent h-28 w-full">
     <div class="flex flex-row flex-wrap gap-3 mt-3">
-      <div class="flex-initial bg-transparent w-64 h-28">
-        <NuxtLink :to="`/dashboard`">
-          <img
-            src="https://www.cubecom.fr/wp-content/uploads/2020/12/Logo-Cube-FondBlanc.png"
-          />
-        </NuxtLink>
-      </div>
       <div class="flex-auto bg-transparent-500 w-10 h-28">
-        <h1 class="">{{title}}</h1>
+        <h1 class="">{{ title }}</h1>
       </div>
       <div
         class="
@@ -33,21 +26,28 @@
             clip-rule="evenodd"
           />
         </svg>
+        <h1>{{ dataUser.name }}</h1>
+        <h1>{{ dataUser.email }}</h1>
       </div>
     </div>
   </div>
 </template>
 
 <script >
-/* const route = useRoute();
-console.log($route.meta.title); */
-
 export default {
+  data() {
+    return {
+      dataUser: {},
+    };
+  },
   props: {
     title: {
       type: String,
       default: "Mon titre",
     },
+  },
+  async mounted() {
+    this.dataUser = JSON.parse(localStorage.getItem("userData"));
   },
 };
 </script>

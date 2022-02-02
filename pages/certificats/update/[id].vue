@@ -192,7 +192,14 @@
 export default {
   data() {
     return {
-      certificatIdData: "",
+      certificatIdData: {
+        projectName: "",
+        type: "",
+        plateform: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+      },
       id: "",
     };
   },
@@ -215,11 +222,13 @@ export default {
 
     var apiURL = "http://localhost:8000/api/certificat/";
 
-    fetch(apiURL + this.id, params).then((response) => {
-      this.certificatIdData = response.json();
-      //console.log("apiurl + id + params", apiURL + this.id, params);
-      //console.log("data", this.certificatIdData);
-    });
+    fetch(apiURL + this.id, params)
+      .then((response) => response.json())
+      .then((response) => {
+        this.certificatIdData = response;
+        //console.log("apiurl + id + params", apiURL + this.id, params);
+        //console.log("data", this.certificatIdData);
+      });
   },
 
   methods: {
