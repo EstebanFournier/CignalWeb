@@ -267,7 +267,7 @@ export default {
         startDate: "",
         endDate: "",
         createdBy: "",
-        email_id:"",
+        email_id: "",
       },
     };
   },
@@ -289,8 +289,7 @@ export default {
       .then((response) => response.json())
       .then((response) => {
         this.createdByChoose = response;
-        this.storeCertificat.createdBy =
-          this.createdByChoose[0].id;
+        this.storeCertificat.createdBy = this.createdByChoose[0].id;
         console.log("createdByChoose", this.createdByChoose);
       })
       .catch((error) => {
@@ -304,8 +303,7 @@ export default {
       .then((response) => response.json())
       .then((response) => {
         this.email_idChoose = response;
-        this.storeCertificat.email_id =
-          this.email_idChoose[0].id;
+        this.storeCertificat.email_id = this.email_idChoose[0].id;
         console.log("createdByChoose", this.email_idChoose);
       })
       .catch((error) => {
