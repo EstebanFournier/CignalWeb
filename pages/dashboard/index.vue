@@ -5,7 +5,4 @@
 </template>
 
 <script>
-/* definePageMeta({
-  title: "Tableau de bord",
-});  */
 </script>

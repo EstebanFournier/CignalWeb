@@ -72,7 +72,6 @@
         </div>
         <div>
           <button
-            
             type="submit"
             class="
               group
@@ -129,20 +128,19 @@ export default {
     };
   },
 
+  // Récupération des données de login puis execution du login
   methods: {
     submit() {
       const dataConnect = {
         email: this.inputEmail,
         password: this.inputPassword,
       };
-      //console.log("ok", dataConnect);
 
       var myInit = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataConnect),
       };
-      //console.log('params', myInit)
 
       var apiURL = "http://localhost:8000/api/login";
 

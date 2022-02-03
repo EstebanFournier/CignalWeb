@@ -187,6 +187,7 @@ export default {
     };
   },
 
+  // Récupération de toutes les données de la table Email
   async mounted() {
     let auth = localStorage.getItem("Authorization");
 
@@ -204,8 +205,6 @@ export default {
       .then((response) => response.json())
       .then((response) => {
         this.emailData = response;
-        //console.log("data", data);
-        //console.log("emailData", data.emailData);
       });
   },
 };

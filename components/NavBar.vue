@@ -126,7 +126,7 @@
         ></span>
         <span class="relative text-black group-hover:text-white">Emails</span>
       </NuxtLink>
-      <NuxtLink :to="`/emails`" class="relative px-6 py-2 group">
+      <NuxtLink :to="`/dashboard`" class="relative px-6 py-2 group">
         <span
           class="
             absolute
@@ -155,19 +155,53 @@
         ></span>
         <span class="relative text-black group-hover:text-white">Logs</span>
       </NuxtLink>
-      <button @click="logout" type="submit">Logout</button>
-      <NuxtLink :to="`/register`">Register</NuxtLink>
+      <NuxtLink :to="`/register`" class="relative px-6 py-2 group">
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            transition
+            duration-300
+            ease-out
+            transform
+            translate-x-1 translate-y-1
+            bg-black
+            group-hover:-translate-x-0 group-hover:-translate-y-0
+          "
+        ></span>
+        <span
+          class="
+            absolute
+            inset-0
+            w-48
+            h-10
+            bg-white
+            border-2 border-black
+            group-hover:bg-black
+          "
+        ></span>
+        <span class="relative text-black group-hover:text-white"
+          >Nouvel utilisateur</span
+        >
+      </NuxtLink>
+      <button class="mt-96" @click="logout" type="submit">Déconnexion</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  /*
+   Appel de la route logout
+   */
   methods: {
     logout() {
+      // Récupération du token d'authentification
       let auth = localStorage.getItem("Authorization");
-      //console.log("auth", auth);
 
+      // Création des paramètres de la requête
       var params = {
         method: "POST",
         headers: {
@@ -176,13 +210,16 @@ export default {
         },
       };
 
+      // URL de la reqête
       var apiURL = "http://localhost:8000/api/logout";
 
+      // Execution de la requête et supression du token dans le cache client.
       fetch(apiURL, params).then((response) => response.json());
       if (localStorage && localStorage.length > 0) {
         localStorage.clear();
       }
 
+      // Redirection vers la vue Login
       this.$router.push("/");
     },
   },

@@ -124,12 +124,11 @@ export default {
     };
   },
 
+  // Récupération des données avant update
   async mounted() {
     let auth = localStorage.getItem("Authorization");
-    //console.log("auth", auth);
 
     this.id = this.$route.params.id;
-    //console.log("id", this.id);
 
     var params = {
       method: "GET",
@@ -138,7 +137,6 @@ export default {
         Authorization: "Bearer " + auth,
       },
     };
-    //console.log("params", params);
 
     var apiURL = "http://localhost:8000/api/alert/";
 
@@ -147,23 +145,19 @@ export default {
       .then((response) => {
         this.alertIdData = response;
         console.log("alertiddata", this.alertIdData);
-        //console.log("apiurl + id + params", apiURL + this.id, params);
-        //console.log("data", this.certificatIdData);
       })
       .catch((error) => {
         console.log("erroe", error);
       });
   },
 
+  // Récupération des nouvelles données pour update et update
   methods: {
     submit(e) {
       e.preventDefault();
 
-      // Keep auth token for request
       let auth = localStorage.getItem("Authorization");
-      //console.log("auth", auth);
 
-      // Creation of parameters for request
       var params = {
         method: "PUT",
         headers: {
@@ -172,7 +166,6 @@ export default {
         },
         body: JSON.stringify(this.alertIdData),
       };
-      //console.log("params", params);
 
       var apiURL = "http://localhost:8000/api/email/";
 

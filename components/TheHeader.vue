@@ -47,6 +47,7 @@ export default {
     },
   },
   async mounted() {
+    // Récupération des données de l'utilisateur connecté
     this.dataUser = JSON.parse(localStorage.getItem("userData"));
   },
 };

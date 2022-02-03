@@ -272,6 +272,7 @@ export default {
     };
   },
 
+  // Récupération des données avant enregistrement
   async mounted() {
     let auth = localStorage.getItem("Authorization");
 
@@ -296,7 +297,6 @@ export default {
         console.log("error", error);
       });
 
-    //Fetch request for email
     var apiURL2 = "http://localhost:8000/api/email";
 
     fetch(apiURL2, params)
@@ -311,12 +311,10 @@ export default {
       });
   },
 
+  // Récupération des données pour l'enregistrement et execution de l'enregistrement
   methods: {
     submit() {
       let auth = localStorage.getItem("Authorization");
-
-      /* $body = JSON.stringify(this.storeCertificat);
-      $body.append(JSON.stringify(this.storeCertificat.createdByChoose)); */
 
       var myInit = {
         method: "POST",

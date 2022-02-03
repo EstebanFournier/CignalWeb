@@ -159,6 +159,7 @@ export default {
     };
   },
 
+  // Récupération des données du nouvel utilisateur puis enregistrement de l'utilisateur
   methods: {
     submit(e) {
       e.preventDefault();

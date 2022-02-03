@@ -89,7 +89,7 @@
             placeholder="Description"
           />
         </div>
-        
+
         <div class="shadow-sm -space-y-px">
           <select
             v-model="storeAlert.certificat_id"
@@ -164,6 +164,7 @@ export default {
     };
   },
 
+  // Récupération des données avant avant enregistrement
   async mounted() {
     let auth = localStorage.getItem("Authorization");
 
@@ -189,6 +190,7 @@ export default {
       });
   },
 
+  // Récupération des données pour l'enregistrement et exceution de l'enregistrement
   methods: {
     submit() {
       let auth = localStorage.getItem("Authorization");

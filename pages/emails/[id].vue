@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheHeader title="Emails"/>
+    <TheHeader title="Emails" />
     <h1>
       {{ emailIdData.id }}
     </h1>
@@ -22,12 +22,11 @@ export default {
     };
   },
 
+  // Récupération des données en fonction de l'id
   async mounted() {
     let auth = localStorage.getItem("Authorization");
-    //console.log("auth", auth);
 
     this.id = this.$route.params.id;
-    //console.log("id", this.id);
 
     var params = {
       method: "GET",
@@ -36,16 +35,13 @@ export default {
         Authorization: "Bearer " + auth,
       },
     };
-    //console.log("params", params);
 
     var apiURL = "http://localhost:8000/api/email/";
 
     fetch(apiURL + this.id, params)
-      .then((response)=>response.json())
+      .then((response) => response.json())
       .then((response) => {
         this.emailIdData = response;
-        //console.log("apiurl + id + params", apiURL + this.id, params);
-        //console.log("data", this.emailIdData);
       })
       .catch((error) => {
         console.log("error", error);

@@ -137,6 +137,7 @@ export default {
     };
   },
 
+  // Récupération des données avant enregistrement
   async mounted() {
     let auth = localStorage.getItem("Authorization");
 
@@ -162,6 +163,7 @@ export default {
       });
   },
 
+  // Récupération des données pour enregistrement puis execution de l'enregistrement
   methods: {
     submit() {
       let auth = localStorage.getItem("Authorization");
