@@ -27,7 +27,7 @@ export default {
     };
 
     // URL de la requête
-    var apiURL = "http://192.168.200.156:8000/api/alert/";
+    var apiURL = "http://192.168.200.161:8000/api/alert/";
 
     // Execution de la requête
     fetch(apiURL + this.id, params)

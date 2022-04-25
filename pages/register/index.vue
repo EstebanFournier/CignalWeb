@@ -89,7 +89,7 @@ export default {
       };
       console.log("params", myInit);
 
-      var apiURL = "http://192.168.200.156:8000/api/register";
+      var apiURL = "http://192.168.200.161:8000/api/register";
 
       fetch(apiURL, myInit)
         .then((response) => response.json())

@@ -50,7 +50,7 @@ export default {
       },
     };
 
-    var apiURL = "http://192.168.200.156:8000/api/email/";
+    var apiURL = "http://192.168.200.161:8000/api/email/";
 
     fetch(apiURL + this.id, params)
       .then((response) => response.json())

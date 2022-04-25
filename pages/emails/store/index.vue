@@ -71,7 +71,7 @@ export default {
       },
     };
 
-    var apiURL = "http://192.168.200.156:8000/api/createdBy";
+    var apiURL = "http://192.168.200.161:8000/api/createdBy";
 
     fetch(apiURL, params)
       .then((response) => response.json())
@@ -99,7 +99,7 @@ export default {
         body: JSON.stringify(this.storeEmail),
       };
 
-      var apiURL = "http://localhost:8000/api/email";
+      var apiURL = "http://192.168.200.161:8000/api/email";
 
       fetch(apiURL, myInit)
         .then((response) => response.json())

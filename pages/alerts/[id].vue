@@ -62,7 +62,7 @@ export default {
       },
     };
 
-    var apiURL = "http://192.168.200.156:8000/api/alert/";
+    var apiURL = "http://192.168.200.161:8000/api/alert/";
 
     fetch(apiURL + this.id, params)
       .then((response) => response.json())

@@ -105,7 +105,7 @@ export default {
       },
     };
 
-    var apiURL = "http://192.168.200.156:8000/api/certificat/";
+    var apiURL = "http://192.168.200.161:8000/api/certificat/";
 
     fetch(apiURL + this.id, params)
       .then((response) => response.json())

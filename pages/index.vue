@@ -83,7 +83,7 @@ export default {
         body: JSON.stringify(dataConnect),
       };
 
-      var apiURL = "http://192.168.200.156:8000/api/login";
+      var apiURL = "http://192.168.200.161:8000/api/login";
 
       fetch(apiURL, myInit)
         .then((response) => response.json())
